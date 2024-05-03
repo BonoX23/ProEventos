@@ -7,16 +7,16 @@ namespace ProEventos.Persistence
     public class GeralPersist : IGeralPersist
     {
         private readonly ProEventosContext _context;
-
         public GeralPersist(ProEventosContext context)
         {
             _context = context;
-        }
 
+        }
         public void Add<T>(T entity) where T : class
         {
-            _context.Add(entity);
+            _context.AddAsync(entity);
         }
+
         public void Update<T>(T entity) where T : class
         {
             _context.Update(entity);
@@ -34,9 +34,7 @@ namespace ProEventos.Persistence
 
         public async Task<bool> SaveChangesAsync()
         {
-            return(await _context.SaveChangesAsync()) > 0;
+            return (await _context.SaveChangesAsync()) > 0;
         }
-
-        
     }
 }

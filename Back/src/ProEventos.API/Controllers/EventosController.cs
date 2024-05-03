@@ -12,6 +12,7 @@ namespace ProEventos.API.Controllers
     public class EventosController : ControllerBase
     {
         private readonly IEventoService _eventoService;
+
         public EventosController(IEventoService eventoService)
         {
             _eventoService = eventoService;
@@ -23,19 +24,15 @@ namespace ProEventos.API.Controllers
             try
             {
                 var eventos = await _eventoService.GetAllEventosAsync(true);
-                if (eventos == null) return NotFound("Nenhum evento encontrado");
+                if (eventos == null) return NotFound("Nenhum evento encontrado.");
 
                 return Ok(eventos);
-
             }
             catch (Exception ex)
             {
-
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                     $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
             }
-
-
         }
 
         [HttpGet("{id}")]
@@ -84,19 +81,17 @@ namespace ProEventos.API.Controllers
             try
             {
                 var evento = await _eventoService.AddEventos(model);
-                if (evento == null) return BadRequest("Erro ao tentar adcionar evento");
+                if (evento == null) return BadRequest("Erro ao tentar adicionar evento.");
 
                 return Ok(evento);
-
             }
             catch (Exception ex)
             {
-
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar adcionar evento: {ex.Message}");
+                    $"Erro ao tentar adicionar eventos. Erro: {ex.Message}");
             }
-
         }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEvento(int id, Evento model)
         {
