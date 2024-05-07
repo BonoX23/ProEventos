@@ -3,7 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './nav/nav.component';
+import { DateTimeFormatPipePipe } from './Helpers/DateTimeFormatPipe.pipe';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +21,8 @@ import { EventoService } from './services/evento.service';
     AppComponent,
     EventosComponent,
     PalestrantesComponent,
-    NavComponent
+    NavComponent,
+    DateTimeFormatPipePipe
    ],
   imports: [
     BrowserModule,
@@ -25,6 +30,9 @@ import { EventoService } from './services/evento.service';
     HttpClientModule,
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
+    TooltipModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot(),
     FormsModule
   ],
   providers: [EventoService],
