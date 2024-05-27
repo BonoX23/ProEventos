@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProEventos.Application.Contratos;
+using ProEventos.Application.Dtos;
 using ProEventos.Domain;
 
 namespace ProEventos.API.Controllers
@@ -24,10 +25,11 @@ namespace ProEventos.API.Controllers
             try
             {
                 var eventos = await _eventoService.GetAllEventosAsync(true);
-                if (eventos == null) return NotFound("Nenhum evento encontrado.");
+                if (eventos == null) return NoContent();
 
                 return Ok(eventos);
             }
+
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
@@ -41,7 +43,7 @@ namespace ProEventos.API.Controllers
             try
             {
                 var evento = await _eventoService.GetEventoByIdAsync(id, true);
-                if (evento == null) return NotFound("Evento por ID não encontrado");
+                if (evento == null) return NoContent();
 
                 return Ok(evento);
 
@@ -61,7 +63,7 @@ namespace ProEventos.API.Controllers
             try
             {
                 var eventos = await _eventoService.GetAllEventosByTemaAsync(tema, true);
-                if (eventos == null) return NotFound("Eventos por tema não encontrado");
+                if (eventos == null) return NoContent();
 
                 return Ok(eventos);
 
@@ -76,15 +78,16 @@ namespace ProEventos.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Evento model)
+        public async Task<IActionResult> Post(EventoDto model)
         {
             try
             {
                 var evento = await _eventoService.AddEventos(model);
-                if (evento == null) return BadRequest("Erro ao tentar adicionar evento.");
+                if (evento == null) return NoContent();
 
                 return Ok(evento);
             }
+
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
@@ -93,12 +96,12 @@ namespace ProEventos.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateEvento(int id, Evento model)
+        public async Task<IActionResult> UpdateEvento(int id, EventoDto model)
         {
             try
             {
                 var evento = await _eventoService.UpdateEvento(id, model);
-                if (evento == null) return BadRequest("Evento não atualizado");
+                if (evento == null) return NoContent();
 
                 return Ok(evento);
 
@@ -116,14 +119,14 @@ namespace ProEventos.API.Controllers
         {
             try
             {
-                if (await _eventoService.DeleteEvento(id))
-                {
-                    return Ok("Deletado");
-                }
+                var evento = await _eventoService.GetEventoByIdAsync(id, true);
+                if (evento == null) return NoContent();
 
-                return BadRequest("Evento não deletado");
-
+                return await _eventoService.DeleteEvento(id) ? 
+                       Ok("Deletado") : 
+                       throw new Exception("Ocorreu um problem não específico ao tentar deletar Evento.");
             }
+            
             catch (Exception ex)
             {
 
