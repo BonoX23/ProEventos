@@ -5,7 +5,6 @@ using AutoMapper;
 using ProEventos.Application.Contratos;
 using ProEventos.Application.Dtos;
 using ProEventos.Domain;
-using ProEventos.Persistence;
 using ProEventos.Persistence.Contratos;
 
 namespace ProEventos.Application
