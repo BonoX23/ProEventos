@@ -1,12 +1,12 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProEventos.Application.Contratos;
+using Microsoft.AspNetCore.Http;
 using ProEventos.Application.Dtos;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using System.Linq;
 
 namespace ProEventos.API.Controllers
 {
@@ -15,7 +15,6 @@ namespace ProEventos.API.Controllers
     public class EventosController : ControllerBase
     {
         private readonly IEventoService _eventoService;
-
         private readonly IWebHostEnvironment _hostEnvironment;
 
         public EventosController(IEventoService eventoService, IWebHostEnvironment hostEnvironment)
@@ -34,7 +33,6 @@ namespace ProEventos.API.Controllers
 
                 return Ok(eventos);
             }
-
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
@@ -51,15 +49,12 @@ namespace ProEventos.API.Controllers
                 if (evento == null) return NoContent();
 
                 return Ok(evento);
-
             }
             catch (Exception ex)
             {
-
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar recuperar evento por ID. Erro: {ex.Message}");
+                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
             }
-
         }
 
         [HttpGet("{tema}/tema")]
@@ -67,19 +62,16 @@ namespace ProEventos.API.Controllers
         {
             try
             {
-                var eventos = await _eventoService.GetAllEventosByTemaAsync(tema, true);
-                if (eventos == null) return NoContent();
+                var evento = await _eventoService.GetAllEventosByTemaAsync(tema, true);
+                if (evento == null) return NoContent();
 
-                return Ok(eventos);
-
+                return Ok(evento);
             }
             catch (Exception ex)
             {
-
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar recuperar evento por ID. Erro: {ex.Message}");
+                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
             }
-
         }
 
         [HttpPost("upload-image/{eventoId}")]
@@ -117,7 +109,6 @@ namespace ProEventos.API.Controllers
 
                 return Ok(evento);
             }
-
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
@@ -126,7 +117,7 @@ namespace ProEventos.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateEvento(int id, EventoDto model)
+        public async Task<IActionResult> Put(int id, EventoDto model)
         {
             try
             {
@@ -134,13 +125,11 @@ namespace ProEventos.API.Controllers
                 if (evento == null) return NoContent();
 
                 return Ok(evento);
-
             }
             catch (Exception ex)
             {
-
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar atualizar evento. Erro: {ex.Message}");
+                    $"Erro ao tentar atualizar eventos. Erro: {ex.Message}");
             }
         }
 
@@ -152,20 +141,23 @@ namespace ProEventos.API.Controllers
                 var evento = await _eventoService.GetEventoByIdAsync(id, true);
                 if (evento == null) return NoContent();
 
-                return await _eventoService.DeleteEvento(id)
-                       ? Ok(new { message = "Deletado" })
-                       : throw new Exception("Ocorreu um problem não específico ao tentar deletar Evento.");
+                if (await _eventoService.DeleteEvento(id))
+                {
+                    DeleteImage(evento.ImagemURL);
+                    return Ok(new { message = "Deletado" });
+                }
+                else
+                {
+                    throw new Exception("Ocorreu um problem não específico ao tentar deletar Evento.");
+                }
             }
-
             catch (Exception ex)
             {
-
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                     $"Erro ao tentar deletar eventos. Erro: {ex.Message}");
             }
         }
-        
-        // NonAction não é um ENDPOINT, não pode ser acessado fora da API
+
         [NonAction]
         public async Task<string> SaveImage(IFormFile imageFile)
         {
@@ -193,6 +185,5 @@ namespace ProEventos.API.Controllers
             if (System.IO.File.Exists(imagePath))
                 System.IO.File.Delete(imagePath);
         }
-
     }
 }

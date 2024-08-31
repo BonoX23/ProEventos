@@ -1,4 +1,5 @@
 <div class="card rounded shadow-sm p-3">
+
   <div class="d-flex">
     <div class="flex-fill pr-3">
       <div class="input-group mb-2">
@@ -9,7 +10,7 @@
         type="text"
         class="form-control"
         placeholder="Filtrar por Tema e Local"
-        [(ngModel)]="filtroLista"
+        [ngModel]="filtroLista"
         >
       </div>
     </div>
@@ -45,7 +46,7 @@
       <td class="d-none d-md-table-cell">
         <img [collapse]="!exibirImagem"
         [isAnimated]="true"
-        src="/assets/{{evento.imagemURL}}"
+        [src]="mostraImagem(evento.imagemURL)"
         [style.width.px]="larguraImagem"
         [style.margin.px]="margemImagem"
         >
@@ -71,7 +72,9 @@
     </tr>
   </tfoot>
 </table>
+
 </div>
+
 <!-- {{eventos | json}} -->
 
 <ng-template #template>
