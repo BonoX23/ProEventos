@@ -99,6 +99,7 @@ namespace ProEventos.API
                     Description = @"JWT Authorization header usando Bearer.
                                 Entre com 'Bearer ' [espaço] então coloque seu token.
                                 Exemplo: 'Bearer 12345abcdef'",
+                    //É obrigatorio ser Authorization
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,
