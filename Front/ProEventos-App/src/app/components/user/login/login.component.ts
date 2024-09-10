@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { UserLogin } from '../../../models/identity/UserLogin';
-import { AccountService } from '../../../services/account.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AccountService } from '@app/services/account.service';
+import { UserLogin } from '@app/models/identity/UserLogin';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit 
-{
+export class LoginComponent implements OnInit {
   model = {} as UserLogin;
 
   constructor(
@@ -22,8 +21,7 @@ export class LoginComponent implements OnInit
   ngOnInit(): void {}
 
   public login(): void {
-    this.accountService.login(this.model).subscribe
-    (
+    this.accountService.login(this.model).subscribe(
       () => {
         this.router.navigateByUrl('/dashboard');
       },
