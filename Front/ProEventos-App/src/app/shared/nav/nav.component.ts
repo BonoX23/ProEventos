@@ -8,10 +8,14 @@ import { AccountService } from '@app/services/account.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
 })
+
 export class NavComponent implements OnInit {
   isCollapsed = true;
 
-  constructor(public accountService: AccountService, private router: Router) {}
+  constructor(
+    public accountService: AccountService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
