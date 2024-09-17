@@ -6,15 +6,13 @@ import { environment } from '@environments/environment';
 import { Observable, ReplaySubject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AccountService {
   private currentUserSource = new ReplaySubject<User>(1);
   public currentUser$ = this.currentUserSource.asObservable();
 
-  baseUrl = environment.apiURL + 'api/account/';
-  constructor(private http: HttpClient) {}
+  baseUrl = environment.apiURL + 'api/account/'
+  constructor(private http: HttpClient) { }
 
   public login(model: any): Observable<void> {
     return this.http.post<User>(this.baseUrl + 'login', model).pipe(
@@ -22,25 +20,24 @@ export class AccountService {
       map((response: User) => {
         const user = response;
         if (user) {
-          this.setCurrentUser(user);
+          this.setCurrentUser(user)
         }
       })
     );
   }
 
   getUser(): Observable<UserUpdate> {
-    return this.http.get<UserUpdate>(this.baseUrl + 'getUser')
-    .pipe(take(1));
+    return this.http.get<UserUpdate>(this.baseUrl + 'getUser').pipe(take(1));
   }
 
   updateUser(model: UserUpdate): Observable<void> {
-    return this.http.put<UserUpdate>(this.baseUrl + 'updateUser', model)
-    .pipe(
+    return this.http.put<UserUpdate>(this.baseUrl + 'updateUser', model).pipe(
       take(1),
       map((user: UserUpdate) => {
-        this.setCurrentUser(user);
-      })
-    );
+          this.setCurrentUser(user);
+        }
+      )
+    )
   }
 
   public register(model: any): Observable<void> {
@@ -49,7 +46,7 @@ export class AccountService {
       map((response: User) => {
         const user = response;
         if (user) {
-          this.setCurrentUser(user);
+          this.setCurrentUser(user)
         }
       })
     );

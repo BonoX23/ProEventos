@@ -2,6 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:4200/",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
             // Usar o IntelliSense para descobrir quais atributos existem para a depuração de C#
             // Passe o mouse sobre a tela para ver a descrição dos atributos existentes
             // Para obter mais informações, visite https://github.com/dotnet/vscode-csharp/blob/main/debugger-launchjson.md.
