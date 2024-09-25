@@ -10,6 +10,7 @@ using System.Linq;
 using ProEventos.API.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using ProEventos.Persistence.Models;
+using ProEventos.API.Helpers;
 
 namespace ProEventos.API.Controllers
 {
