@@ -35,6 +35,9 @@ import { NgxCurrencyModule } from 'ngx-currency';
 import { AccountService } from './services/account.service';
 import { JwtInterceptor } from './interceptor/jwt.interceptor';
 import { HomeComponent } from './components/home/home.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { PerfilDetalheComponent } from './components/user/perfil/perfil-detalhe/perfil-detalhe.component';
+import { PalestranteListaComponent } from './components/palestrantes/palestrante-lista/palestrante-lista.component';
 
 defineLocale('pt-br', ptBrLocale);
 
@@ -43,9 +46,11 @@ defineLocale('pt-br', ptBrLocale);
     AppComponent,
     EventosComponent,
     PalestrantesComponent,
+    PalestranteListaComponent,
     ContatosComponent,
     DashboardComponent,
     PerfilComponent,
+    PerfilDetalheComponent,
     NavComponent,
     TituloComponent,
     DateTimeFormatPipePipe,
@@ -66,6 +71,7 @@ defineLocale('pt-br', ptBrLocale);
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
+    TabsModule.forRoot(),
     ModalModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 10000,
@@ -75,7 +81,8 @@ defineLocale('pt-br', ptBrLocale);
     NgxSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxCurrencyModule
+    NgxCurrencyModule,
+    TabsModule.forRoot()
   ],
   providers: 
   [
