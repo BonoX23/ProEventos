@@ -7,7 +7,7 @@
             <div class="form-group col-md-12">
               <label>Tema</label>
               <input type="text" class="form-control" [ngClass]="cssValidator(f.tema)" formControlName="tema"
-              placeholder="Insira o Tema" [ngModel]="evento.tema">
+              placeholder="Insira o Tema" [(ngModel)]="evento.tema">
               <div *ngIf="f.tema.errors?.required" class="invalid-feedback">
                 Tema é obrigatório.
               </div>
@@ -23,7 +23,7 @@
             <div class="form-group col-md-8">
               <label>Local</label>
               <input type="text" class="form-control" [ngClass]="cssValidator(f.local)"
-              formControlName="local" placeholder="" [ngModel]="evento.local">
+              formControlName="local" placeholder="" [(ngModel)]="evento.local">
               <div *ngIf="f.local.errors?.required && f.local.touched" class="invalid-feedback">
                 Local é obrigatório.
               </div>
@@ -32,7 +32,7 @@
               <label>Data e Hora</label>
               <input type="datetime" class="form-control" [ngClass]="cssValidator(f.dataEvento)"
               value="{{evento.dataEvento | DateFormatPipe}}" bsDatepicker [bsConfig]="bsConfig" formControlName="dataEvento"
-              placeholder="" [ngModel]="evento.dataEvento">
+              placeholder="" [(ngModel)]="evento.dataEvento">
               <div *ngIf="f.dataEvento.errors?.required && f.dataEvento.touched" class="invalid-feedback">
                 Data e Hora é obrigatório.
               </div>
@@ -42,7 +42,7 @@
             <div class="form-group col-md-2">
               <label>Qtd Pessoas</label>
               <input type="number" class="form-control" [ngClass]="cssValidator(f.qtdPessoas)" formControlName="qtdPessoas"
-              placeholder="" [ngModel]="evento.qtdPessoas">
+              placeholder="" [(ngModel)]="evento.qtdPessoas">
               <div *ngIf="f.qtdPessoas.errors?.required && f.qtdPessoas.touched" class="invalid-feedback">
                 Qtd Pessoas é obrigatório.
               </div>
@@ -53,7 +53,7 @@
             <div class="form-group col-md-4">
               <label>Telefone</label>
               <input type="text" class="form-control" [ngClass]="cssValidator(f.telefone)"
-              formControlName="telefone" placeholder="(000) 90000-0000" [ngModel]="evento.telefone">
+              formControlName="telefone" placeholder="(000) 90000-0000" [(ngModel)]="evento.telefone">
               <div *ngIf="f.telefone.errors?.required && f.telefone.touched" class="invalid-feedback">
                 Telefone é obrigatório.
               </div>
@@ -61,7 +61,7 @@
             <div class="form-group col-md-6">
               <label>e-mail</label>
               <input type="text" class="form-control" [ngClass]="cssValidator(f.email)"
-              formControlName="email" placeholder="e-mail" [ngModel]="evento.email">
+              formControlName="email" placeholder="e-mail" [(ngModel)]="evento.email">
               <div *ngIf="f.email.errors?.required && f.email.touched" class="invalid-feedback">
                 e-mail é obrigatório.
               </div>
@@ -172,6 +172,22 @@
       </div>
     </div>
   </div>
+
+  <div class="card rounded shadow-sm mt-3" *ngIf="modoEditar">
+    <div class="p-3">
+      <div class="d-flex border-bottom">
+        <h2 class="mr-auto">
+          Redes Sociais do Evento
+        </h2>
+        <h2>
+          <i class="fas fa-share-square"></i>
+        </h2>
+      </div>
+      <app-redesSociais [eventoId]="eventoId"></app-redesSociais>
+    </div>
+  </div>
+
+
 </div>
 <div class="col-md-4" *ngIf="modoEditar">
   <div [formGroup]="form" class="card-evento-view shadow-sm">

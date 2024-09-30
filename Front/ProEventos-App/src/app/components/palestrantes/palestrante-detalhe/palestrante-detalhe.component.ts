@@ -11,6 +11,7 @@ import { debounceTime, map, tap } from 'rxjs/operators';
   templateUrl: './palestrante-detalhe.component.html',
   styleUrls: ['./palestrante-detalhe.component.scss']
 })
+
 export class PalestranteDetalheComponent implements OnInit {
   public form!: FormGroup;
   public situacaoDoForm = '';

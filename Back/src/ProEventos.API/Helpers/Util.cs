@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using ProEventos.API.Helpers;
 
-namespace ProEventos.API.Helpers
+namespace ProEventos.Api.Helpers
 {
     public class Util : IUtil
     {
@@ -35,9 +36,12 @@ namespace ProEventos.API.Helpers
 
         public void DeleteImage(string imageName, string destino)
         {
-            var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, @$"Resources/{destino}", imageName);
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
+            if (!string.IsNullOrEmpty(imageName)) 
+            {
+                var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, @$"Resources/{destino}", imageName);
+                if (System.IO.File.Exists(imagePath))
+                    System.IO.File.Delete(imagePath);
+            }
         }
     }
 }

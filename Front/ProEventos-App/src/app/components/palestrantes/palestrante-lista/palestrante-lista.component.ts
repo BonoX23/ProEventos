@@ -92,5 +92,4 @@ export class PalestranteListaComponent implements OnInit {
       )
       .add(() => this.spinner.hide());
   }
-
 }

@@ -1,5 +1,4 @@
 <div class="card rounded shadow-sm p-3">
-
   <div class="d-flex">
     <div class="flex-fill pr-3">
       <div class="input-group mb-2">
@@ -72,27 +71,20 @@
     </tr>
   </tfoot>
 </table>
-
 <div class="d-flex justify-content-center">
-
   <pagination
     [boundaryLinks]="true"
-
     [totalItems]="pagination.totalItems"
     [itemsPerPage]="pagination.itemsPerPage"
     [(ngModel)]="pagination.currentPage"
     (pageChanged)="pageChanged($event)"
-
     pageBtnClass="btn"
     previousText="&lsaquo;"
     nextText="&rsaquo;"
     firstText="&laquo;"
     lastText="&raquo;">
-
   </pagination>
-
 </div>
-
 </div>
 
 <!-- {{eventos | json}} -->

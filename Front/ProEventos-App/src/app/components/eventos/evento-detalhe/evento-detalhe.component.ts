@@ -27,6 +27,7 @@ import { environment } from '@environments/environment';
   styleUrls: ['./evento-detalhe.component.scss'],
   providers: [DatePipe],
 })
+
 export class EventoDetalheComponent implements OnInit {
   modalRef: BsModalRef;
   eventoId: number;
@@ -88,10 +89,7 @@ export class EventoDetalheComponent implements OnInit {
             this.evento = { ...evento };
             this.form.patchValue(this.evento);
             if (this.evento.imagemURL !== '') {
-              this.imagemURL =
-                environment.apiURL +
-                'resources/images/' +
-                this.evento.imagemURL;
+              this.imagemURL = environment.apiURL + 'resources/images/' + this.evento.imagemURL;
             }
             this.carregarLotes();
           },
@@ -255,7 +253,7 @@ export class EventoDetalheComponent implements OnInit {
   onFileChange(ev: any): void {
     const reader = new FileReader();
 
-    reader.onload = (event: any) => (this.imagemURL = event.target.result);
+    reader.onload = (event: any) => this.imagemURL = event.target.result;
 
     this.file = ev.target.files;
     reader.readAsDataURL(this.file[0]);
@@ -265,18 +263,15 @@ export class EventoDetalheComponent implements OnInit {
 
   uploadImagem(): void {
     this.spinner.show();
-    this.eventoService
-      .postUpload(this.eventoId, this.file)
-      .subscribe(
-        () => {
-          this.carregarEvento();
-          this.toastr.success('Imagem atualizada com Sucesso', 'Sucesso!');
-        },
-        (error: any) => {
-          this.toastr.error('Erro ao fazer upload de imagem', 'Erro!');
-          console.log(error);
-        }
-      )
-      .add(() => this.spinner.hide());
+    this.eventoService.postUpload(this.eventoId, this.file).subscribe(
+      () => {
+        this.carregarEvento();
+        this.toastr.success('Imagem atualizada com Sucesso', 'Sucesso!');
+      },
+      (error: any) => {
+        this.toastr.error('Erro ao fazer upload de imagem', 'Erro!');
+        console.log(error);
+      }
+    ).add(() => this.spinner.hide());
   }
 }

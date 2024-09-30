@@ -22,6 +22,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Collections.Generic;
 using ProEventos.API.Helpers;
+using ProEventos.Api.Helpers;
 
 namespace ProEventos.API
 {

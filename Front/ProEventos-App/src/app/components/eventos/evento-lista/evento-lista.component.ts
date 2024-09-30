@@ -31,7 +31,7 @@ export class EventoListaComponent implements OnInit {
   public filtrarEventos(evt: any): void {
     if (this.termoBuscaChanged.observers.length === 0) {
       this.termoBuscaChanged
-        .pipe(debounceTime(1000)) // 1 segundo
+        .pipe(debounceTime(1000))
         .subscribe((filtrarPor) => {
           this.spinner.show();
           this.eventoService
