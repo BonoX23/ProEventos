@@ -15,6 +15,7 @@ import { debounceTime } from 'rxjs/operators';
   templateUrl: './palestrante-lista.component.html',
   styleUrls: ['./palestrante-lista.component.scss']
 })
+
 export class PalestranteListaComponent implements OnInit {
   public Palestrantes: Palestrante[] = [];
   public eventoId = 0;

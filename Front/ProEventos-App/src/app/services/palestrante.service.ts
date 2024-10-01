@@ -9,6 +9,7 @@ import { map, take } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
+
 export class PalestranteService {
   baseURL = environment.apiURL + 'api/palestrantes';
 

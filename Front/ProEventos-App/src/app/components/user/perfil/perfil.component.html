@@ -1,5 +1,6 @@
 <app-titulo [titulo]="'Perfil' + (ehPalestrante ? ' Palestrante' : '')" [iconClass]="'fa fa-address-card'"></app-titulo>
 <div class="card rounded shadow-sm">
+
     <div class="row p-3">
       <div class="col-lg-3 pt-1">
         <div class="card mb-3">
@@ -15,7 +16,7 @@
               style="cursor: pointer;">
           </div>
           <div class="card-body">
-            <div class="h4 text-center mb-3">@{{usuario.userName}}</div>
+            <div class="h4 text-center mb-3">{{usuario.userName}}</div>
             <div class="h7 text-bold pb-1"><b>Nome:</b> {{usuario.primeiroNome + ' ' + usuario.ultimoNome}}</div>
             <div class="h7">
               {{usuario.descricao}}
@@ -44,6 +45,7 @@
             <ng-template tabHeading>
               <i class="fa fa-address-card mr-2"></i><span>Perfil</span>
             </ng-template>
+
             <app-perfil-detalhe (changeFormValue)="setFormValue($event)"></app-perfil-detalhe>
           </tab>
           <tab *ngIf="ehPalestrante" class="border border-top-0 p-3">
@@ -53,6 +55,7 @@
             <div class="form-group">
               <h3 class="border-bottom">Palestrante</h3>
             </div>
+
             <app-palestrante-detalhe></app-palestrante-detalhe>
           </tab>
           <tab *ngIf="ehPalestrante" class="border border-top-0 p-3">
@@ -68,4 +71,5 @@
         </tabset>
         </div>
 </div>
+
 </div>

@@ -49,6 +49,7 @@ export class PalestranteDetalheComponent implements OnInit {
           this.toastr.error('Erro ao Carregar o Palestrante', 'Erro')
         }
       )
+      .add(() => this.spinner.hide());
   }
 
   public get f(): any {

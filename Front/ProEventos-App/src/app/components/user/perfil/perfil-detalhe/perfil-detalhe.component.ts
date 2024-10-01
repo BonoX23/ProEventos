@@ -1,5 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControlOptions,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ValidatorField } from '@app/helpers/ValidatorField';
 import { UserUpdate } from '@app/models/identity/UserUpdate';
@@ -11,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-perfil-detalhe',
   templateUrl: './perfil-detalhe.component.html',
-  styleUrls: ['./perfil-detalhe.component.scss']
+  styleUrls: ['./perfil-detalhe.component.scss'],
 })
 export class PerfilDetalheComponent implements OnInit {
   @Output() changeFormValue = new EventEmitter();
